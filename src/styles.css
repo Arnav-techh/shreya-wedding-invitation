@@ -1,0 +1,257 @@
+/*
+ * Tailwind v4 entry: config lives here, with no tailwind.config.js or PostCSS plugin.
+ * - Keep every @import in this top block, above @theme and the rest of the file. Install an
+ *   npm package before @importing its CSS. Never @import a remote URL (web fonts, CDN CSS): the
+ *   build resolves @import from the filesystem. Load those with a <link> in the head() of
+ *   src/routes/__root.tsx and name the family in a --font-* token in @theme inline below.
+ */
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+/*
+ * Design system definition.
+ *
+ * The design lives in this file: oklch color tokens on the shadcn variables
+ * (--background, --foreground, --primary, --secondary, --muted, --accent, ...) plus
+ * new tokens as needed, font tokens, and custom styles and animations.
+ *
+ * The @theme inline block maps CSS custom properties to Tailwind utility
+ * classes (e.g. --color-primary -> bg-primary, text-primary).
+ *
+ * The :root and .dark blocks define the actual color values using oklch.
+ * All colors MUST use oklch format.
+ *
+ * To add a new semantic color:
+ * 1. Add the variable to :root (light value) and .dark (dark value)
+ * 2. Register it in @theme inline as --color-<name>: var(--<name>)
+ */
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+  --radius-3xl: calc(var(--radius) + 12px);
+  --radius-4xl: calc(var(--radius) + 16px);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-ring-offset-background: var(--background);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+}
+
+:root {
+  --radius: 1rem;
+  --background: oklch(0.975 0.012 75);
+  --foreground: oklch(0.32 0.035 40);
+  --card: oklch(0.99 0.008 80);
+  --card-foreground: oklch(0.32 0.035 40);
+  --popover: oklch(0.99 0.008 80);
+  --popover-foreground: oklch(0.32 0.035 40);
+  --primary: oklch(0.7 0.085 75);
+  --primary-foreground: oklch(0.99 0.008 80);
+  --secondary: oklch(0.93 0.03 15);
+  --secondary-foreground: oklch(0.32 0.035 40);
+  --muted: oklch(0.95 0.015 60);
+  --muted-foreground: oklch(0.5 0.03 40);
+  --accent: oklch(0.9 0.04 12);
+  --accent-foreground: oklch(0.32 0.035 40);
+  --destructive: oklch(0.55 0.17 25);
+  --destructive-foreground: oklch(0.99 0 0);
+  --border: oklch(0.88 0.03 70);
+  --input: oklch(0.88 0.03 70);
+  --ring: oklch(0.7 0.085 75);
+  --gold: oklch(0.66 0.09 72);
+  --gold-light: oklch(0.82 0.07 80);
+  --blush: oklch(0.9 0.045 12);
+  --blush-deep: oklch(0.7 0.1 10);
+  --band: oklch(0.955 0.022 30);
+  --marigold: oklch(0.78 0.15 65);
+  --leaf: oklch(0.55 0.09 145);
+  --glow: oklch(0.8 0.12 15);
+  --shadow-soft: 0 20px 50px -25px color-mix(in oklab, var(--gold) 45%, transparent);
+}
+
+.dark {
+  --background: oklch(0.2 0.025 20);
+  --foreground: oklch(0.93 0.02 75);
+  --card: oklch(0.25 0.03 20);
+  --card-foreground: oklch(0.93 0.02 75);
+  --popover: oklch(0.25 0.03 20);
+  --popover-foreground: oklch(0.93 0.02 75);
+  --primary: oklch(0.78 0.09 78);
+  --primary-foreground: oklch(0.2 0.025 20);
+  --secondary: oklch(0.3 0.04 15);
+  --muted: oklch(0.28 0.03 20);
+  --muted-foreground: oklch(0.75 0.03 60);
+  --accent: oklch(0.32 0.05 12);
+  --border: oklch(0.4 0.05 60);
+  --input: oklch(0.4 0.05 60);
+  --gold: oklch(0.8 0.1 78);
+  --gold-light: oklch(0.88 0.07 82);
+  --blush: oklch(0.42 0.07 12);
+  --blush-deep: oklch(0.72 0.12 10);
+  --band: oklch(0.24 0.035 15);
+  --glow: oklch(0.75 0.15 15);
+  --shadow-soft: 0 20px 50px -25px color-mix(in oklab, var(--gold) 35%, transparent);
+}
+
+@theme inline {
+  --color-gold: var(--gold);
+  --color-gold-light: var(--gold-light);
+  --color-blush: var(--blush);
+  --color-blush-deep: var(--blush-deep);
+  --font-display: "Cormorant Garamond", serif;
+  --font-script: "Pinyon Script", cursive;
+  --font-couple: "Great Vibes", cursive;
+  --font-sans: "Jost", system-ui, sans-serif;
+  --shadow-soft: var(--shadow-soft);
+}
+
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+  }
+}
+
+html { scroll-behavior: smooth; }
+body { font-family: var(--font-sans); font-weight: 300; -webkit-font-smoothing: antialiased; }
+
+@utility section { padding: 5rem 1.25rem; max-width: 52rem; margin-inline: auto; @media (min-width: 640px) { padding: 7rem 2rem; } }
+@utility bg-band { max-width: none; background: linear-gradient(180deg, var(--background), var(--band) 20%, var(--band) 80%, var(--background)); & > * { max-width: 48rem; margin-inline: auto; } }
+@utility eyebrow { font-size: 0.7rem; letter-spacing: 0.32em; text-transform: uppercase; color: var(--gold); font-weight: 500; }
+@utility card-soft { background: color-mix(in oklab, var(--card) 85%, transparent); border: 1px solid color-mix(in oklab, var(--gold) 30%, transparent); border-radius: var(--radius); box-shadow: var(--shadow-soft); }
+@utility arch-frame { overflow: hidden; border-radius: 999px 999px 1rem 1rem; border: 1px solid var(--gold-light); padding: 6px; background: var(--card); & > * { border-radius: 999px 999px 0.75rem 0.75rem; overflow: hidden; } }
+@utility placeholder-photo { background: radial-gradient(circle at 50% 30%, var(--card), var(--blush) 140%); }
+@utility btn-gold { display: inline-flex; align-items: center; justify-content: center; min-height: 3rem; padding: 0 1.75rem; border-radius: 999px; background: linear-gradient(135deg, var(--gold-light), var(--gold)); color: var(--primary-foreground); font-size: 0.8rem; letter-spacing: 0.2em; text-transform: uppercase; font-weight: 500; box-shadow: var(--shadow-soft); transition: transform .3s, filter .3s; &:hover { transform: translateY(-2px); filter: brightness(1.05); } &:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; } &:disabled { opacity: .6; } }
+@utility btn-outline { display: inline-flex; align-items: center; justify-content: center; min-height: 3rem; padding: 0 1.75rem; border-radius: 999px; border: 1px solid var(--gold); color: var(--gold); font-size: 0.8rem; letter-spacing: 0.2em; text-transform: uppercase; font-weight: 500; transition: background .3s; &:hover { background: color-mix(in oklab, var(--gold) 10%, transparent); } &:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; } }
+@utility field { width: 100%; border-radius: 0.75rem; border: 1px solid var(--input); background: var(--background); padding: 0.75rem 1rem; color: var(--foreground); &:focus { outline: none; border-color: var(--gold); box-shadow: 0 0 0 3px color-mix(in oklab, var(--gold) 20%, transparent); } }
+@utility cover { background: radial-gradient(ellipse at 50% 40%, var(--card), var(--background) 55%, var(--blush) 140%); }
+@utility door-left { background: linear-gradient(90deg, var(--band), var(--background)); }
+@utility door-right { background: linear-gradient(270deg, var(--band), var(--background)); }
+@utility petal { position: absolute; top: -5%; border-radius: 80% 0 80% 0; background: linear-gradient(135deg, var(--blush), var(--blush-deep)); opacity: .85; animation-name: petal-fall; animation-timing-function: linear; animation-fill-mode: forwards; }
+@keyframes petal-fall { to { transform: translate3d(60px, 110vh, 0) rotate(540deg); opacity: 0.2; } }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+}
+
+body { transition: background-color .6s, color .6s; }
+@utility toran-swing { animation: swing 3.5s ease-in-out infinite alternate; }
+@keyframes swing { from { transform: rotate(-4deg); } to { transform: rotate(4deg); } }
+@utility mandala-spin { animation: spin-slow 90s linear infinite; }
+@keyframes spin-slow { to { transform: rotate(360deg); } }
+@utility jharokha-band { height: 10px; background: radial-gradient(circle at 50% 0, transparent 5px, var(--gold) 5.5px, transparent 6.5px) 0 0 / 14px 10px repeat-x; opacity: .7; }
+@utility float-up { position: absolute; bottom: -40px; animation-name: float-up; animation-timing-function: linear; animation-iteration-count: infinite; }
+@keyframes float-up { 0% { transform: translate(0,0) rotate(0); opacity: 0; } 10% { opacity: .9; } 50% { transform: translate(30px,-55vh) rotate(180deg); } 90% { opacity: .7; } 100% { transform: translate(-20px,-110vh) rotate(360deg); opacity: 0; } }
+@utility glow-heart { color: var(--blush-deep); filter: drop-shadow(0 0 6px var(--glow)); animation: twinkle 2.6s ease-in-out infinite; }
+@utility glow-flower { color: var(--blush); filter: drop-shadow(0 0 6px var(--glow)); }
+@utility glow-marigold { color: var(--marigold); filter: drop-shadow(0 0 6px var(--marigold)); }
+@keyframes twinkle { 50% { opacity: .55; transform: scale(.85); } }
+@utility arch-glow { filter: blur(6px); opacity: .6; animation: twinkle 4s ease-in-out infinite; }
+@utility btn-pulse { animation: pulse-ring 2.4s ease-out infinite; }
+@keyframes pulse-ring { 0% { box-shadow: 0 0 0 0 color-mix(in oklab, var(--gold) 55%, transparent); } 100% { box-shadow: 0 0 0 18px transparent; } }
+@utility text-shimmer { background: linear-gradient(110deg, var(--foreground) 35%, var(--gold-light) 50%, var(--foreground) 65%) 0 0 / 250% 100%; -webkit-background-clip: text; background-clip: text; color: transparent; animation: shimmer 5s linear infinite; }
+@keyframes shimmer { from { background-position: 150% 0; } to { background-position: -100% 0; } }
+@utility float-soft { animation: float-soft 6s ease-in-out infinite; }
+@keyframes float-soft { 50% { transform: translateY(-10px); } }
+@utility card-glow { transition: box-shadow .4s; &:hover { box-shadow: 0 0 30px -6px var(--glow); } }
+@utility heartbeat { animation: heartbeat 1.4s ease-in-out infinite; }
+@keyframes heartbeat { 15%, 45% { transform: scale(1.25); } 30% { transform: scale(1); } }
+@media (prefers-reduced-motion: reduce) { .float-up { display: none; } }
+
+/* Keep all cover text below the arch shoulders and inside both inner rails. */
+.cover-frame {
+  max-width: min(24rem, calc((100svh - 5rem) * 0.714));
+  aspect-ratio: 5 / 7;
+}
+.cover > .mandala-spin { opacity: 0.07; }
+.cover-content { inset: 23% 15% 6%; gap: 0.5rem; }
+.cover-eyebrow { color: var(--gold); font-size: 0.625rem; font-weight: 500; text-transform: uppercase; }
+.cover-names { font-size: 2.75rem; line-height: 1; }
+.cover-names > span { font-size: 1.75rem; line-height: 1.15; }
+.cover-guest { overflow-wrap: anywhere; line-height: 1.15; }
+.cover-open { min-height: 2.75rem; padding-inline: 1rem; font-size: 0.625rem; letter-spacing: 0; flex-shrink: 0; }
+.couple-signature { max-width: 30rem; }
+.signature-name { font-size: 5rem; line-height: 1.25; padding-inline: 1rem; color: var(--foreground); }
+.signature-family { font-size: 1rem; text-transform: uppercase; color: var(--muted-foreground); }
+.signature-amp { font-size: 2.25rem; line-height: 1; margin-block: 1rem; }
+.event-card { border-radius: 0.5rem; }
+@media (min-width: 640px) { .signature-name { font-size: 6.5rem; } }
+@media (max-height: 650px) {
+  .cover-content { gap: 0.25rem; }
+  .cover-names { font-size: 2rem; }
+  .cover-names > span { font-size: 1.25rem; }
+  .cover-guest { font-size: 1rem; }
+  .cover-content > .text-base { font-size: 0.75rem; }
+  .cover-content > svg { width: 3.5rem; }
+  .cover-open { min-height: 2.25rem; padding-inline: 0.75rem; font-size: 0.5625rem; }
+}
+
+/* ---- Premium motion layer ---- */
+.eyebrow, .cover-eyebrow {
+  background: linear-gradient(100deg, var(--gold) 20%, var(--gold-light) 45%, var(--gold) 70%);
+  background-size: 250% 100%; -webkit-background-clip: text; background-clip: text; color: transparent;
+  animation: gold-shimmer 4.5s linear infinite;
+}
+@keyframes gold-shimmer { from { background-position: 150% 0; } to { background-position: -100% 0; } }
+.signature-name { animation: name-glow 3.5s ease-in-out infinite alternate; }
+@keyframes name-glow { from { text-shadow: 0 0 0 transparent; } to { text-shadow: 0 0 22px color-mix(in oklab, var(--gold) 45%, transparent); } }
+.arch-frame { position: relative; box-shadow: 0 0 0 1px color-mix(in oklab, var(--gold) 50%, transparent), 0 25px 60px -25px color-mix(in oklab, var(--gold) 55%, transparent); }
+.arch-frame img { animation: ken-burns 18s ease-in-out infinite alternate; }
+@keyframes ken-burns { from { transform: scale(1); } to { transform: scale(1.12) translate(-2%, -2%); } }
+.arch-frame::after, .card-soft::after {
+  content: ""; position: absolute; inset: 0; pointer-events: none; border-radius: inherit;
+  background: linear-gradient(115deg, transparent 35%, color-mix(in oklab, var(--gold-light) 40%, transparent) 50%, transparent 65%);
+  background-size: 300% 100%; animation: sheen 7s ease-in-out infinite;
+}
+.card-soft { position: relative; overflow: hidden; }
+@keyframes sheen { 0%, 60% { background-position: 150% 0; } 100% { background-position: -50% 0; } }
+.spin-slow { animation: spin-slow 80s linear infinite; }
+@keyframes spin-slow { to { rotate: 360deg; } }
+.sparkle { position: absolute; width: 6px; height: 6px; border-radius: 9999px; background: var(--gold-light);
+  box-shadow: 0 0 10px 3px color-mix(in oklab, var(--gold) 60%, transparent); animation: twinkle 3s ease-in-out infinite; }
+@keyframes twinkle { 0%, 100% { opacity: 0; transform: scale(0.4); } 50% { opacity: 1; transform: scale(1); } }
+.divider-gold { height: 1px; width: 8rem; margin: 1.25rem auto 0; background: linear-gradient(90deg, transparent, var(--gold), transparent); }
+@media (prefers-reduced-motion: reduce) {
+  .eyebrow, .cover-eyebrow, .signature-name, .arch-frame img, .arch-frame::after, .card-soft::after, .spin-slow, .sparkle { animation: none; }
+  .sparkle { display: none; }
+}
