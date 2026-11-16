@@ -12,19 +12,24 @@ import { useEffect, type ReactNode } from "react";
 
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
-import { wedding } from "@/config/wedding";
+
+// Website configuration
+const SITE_URL = "https://shreya-wedding-invitation.vercel.app";
 
 function NotFoundComponent() {
   return (
     <div className="flex min-h-screen items-center justify-center bg-background px-4">
       <div className="max-w-md text-center">
         <h1 className="text-7xl font-bold text-foreground">404</h1>
+
         <h2 className="mt-4 text-xl font-semibold text-foreground">
           Page not found
         </h2>
+
         <p className="mt-2 text-sm text-muted-foreground">
           The page you're looking for doesn't exist or has been moved.
         </p>
+
         <div className="mt-6">
           <Link
             to="/"
@@ -88,28 +93,21 @@ export const Route = createRootRouteWithContext<{
 }>()({
   head: () => ({
     meta: [
-      { charSet: "utf-8" },
+      {
+        charSet: "utf-8",
+      },
       {
         name: "viewport",
         content: "width=device-width, initial-scale=1",
       },
       {
-        title: `${wedding.bride.short} & ${wedding.groom.short} — Wedding Invitation`,
+        name: "robots",
+        content: "index, follow",
       },
       {
-        name: "description",
-        content: `Wedding invitation of ${wedding.bride.name} & ${wedding.groom.name}, ${wedding.dateLabel}`,
+        name: "theme-color",
+        content: "#fff8f4",
       },
-      {
-        property: "og:title",
-        content: `${wedding.bride.short} & ${wedding.groom.short} — Wedding Invitation`,
-      },
-      {
-        property: "og:description",
-        content: `Wedding invitation of ${wedding.bride.name} & ${wedding.groom.name}, ${wedding.dateLabel}`,
-      },
-      { property: "og:type", content: "website" },
-      { name: "twitter:card", content: "summary_large_image" },
     ],
 
     links: [
@@ -134,11 +132,17 @@ export const Route = createRootRouteWithContext<{
         href: "https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=Pinyon+Script&family=Great+Vibes&family=Jost:wght@300;400;500&display=swap",
       },
 
-      // Shreya & Kunal Wedding Favicon
+      // Wedding Favicon
       {
         rel: "icon",
         type: "image/x-icon",
-        href: "/favicon.ico?v=3",
+        href: "/favicon.ico?v=4",
+      },
+
+      // Canonical website origin
+      {
+        rel: "preconnect",
+        href: SITE_URL,
       },
     ],
   }),
