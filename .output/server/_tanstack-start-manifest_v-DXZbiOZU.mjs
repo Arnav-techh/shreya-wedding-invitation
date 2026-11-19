@@ -1,0 +1,20 @@
+//#region node_modules/.nitro/vite/services/ssr/assets/_tanstack-start-manifest_v-DXZbiOZU.js
+var tsrStartManifest = () => ({ routes: {
+	__root__: {
+		filePath: "C:/Users/DELL/OneDrive/Desktop/Coding/shreya-wedding-invitation/src/routes/__root.tsx",
+		children: ["/", "/sitemap.xml"],
+		preloads: ["/assets/index-CQbY16IZ.js"],
+		scripts: [{ attrs: {
+			type: "module",
+			async: !0,
+			src: "/assets/index-CQbY16IZ.js"
+		} }]
+	},
+	"/": {
+		filePath: "C:/Users/DELL/OneDrive/Desktop/Coding/shreya-wedding-invitation/src/routes/index.tsx",
+		children: void 0,
+		preloads: ["/assets/routes-D28gnCJo.js"]
+	}
+} });
+//#endregion
+export { tsrStartManifest };

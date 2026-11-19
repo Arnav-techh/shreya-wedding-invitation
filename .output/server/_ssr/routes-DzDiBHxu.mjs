@@ -1,0 +1,185 @@
+import { _ as createFileRoute, g as lazyRouteComponent } from "../_libs/@tanstack/react-router+[...].mjs";
+//#region node_modules/.nitro/vite/services/ssr/assets/routes-DzDiBHxu.js
+var wedding = {
+	bride: {
+		name: "Shreya Bhansali",
+		short: "Shreya",
+		family: "Daughter of the Bhansali Family",
+		photo: "/assets/bride-portrait-RFmXK-Ko.jpg"
+	},
+	groom: {
+		name: "Kunal Jain",
+		short: "Kunal",
+		family: "Son of the Jain Family",
+		photo: "/assets/groom-portrait-BIE8idqq.jpg"
+	},
+	hostFamily: "Bhansali Family",
+	dateISO: "2027-01-31T19:00:00+05:30",
+	endISO: "2027-02-01T01:30:00+05:30",
+	dateLabel: "Sunday, 31 January 2027",
+	coverDateLabel: "31 · January · 2027",
+	timeLabel: "Times will be updated later",
+	venue: {
+		name: "Greenland Resort",
+		address: "Surat, Gujarat, India",
+		mapsQuery: "Greenland Resort, Surat"
+	},
+	events: [
+		{
+			title: "Beats and Bling",
+			dateISO: "2027-01-30",
+			day: "30",
+			month: "January",
+			weekday: "Saturday",
+			names: ["Sangeet Night"],
+			time: "7 PM onwards",
+			meal: "Followed by Dinner",
+			startISO: "2027-01-30T19:00:00+05:30",
+			icon: "music"
+		},
+		{
+			title: "Mella Dillo Ka",
+			dateISO: "2027-01-31",
+			day: "31",
+			month: "January",
+			weekday: "Sunday",
+			names: ["Carnival"],
+			time: "11 AM onwards",
+			meal: "Followed by Lunch",
+			startISO: "2027-01-31T11:00:00+05:30",
+			icon: "sun"
+		},
+		{
+			title: "Dil se Dil Tak",
+			dateISO: "2027-01-31",
+			day: "31",
+			month: "January",
+			weekday: "Sunday",
+			names: ["Varmala and Reception"],
+			time: "7 PM onwards",
+			meal: "Followed by Dinner",
+			startISO: "2027-01-31T19:00:00+05:30",
+			icon: "heart"
+		},
+		{
+			title: "Circle of Love",
+			dateISO: "2027-02-01",
+			day: "1",
+			month: "February",
+			weekday: "Monday",
+			names: ["Phere"],
+			time: "1:30 AM",
+			meal: "After the Sunday evening reception",
+			startISO: "2027-02-01T01:30:00+05:30",
+			icon: "flame"
+		}
+	],
+	style: "A celebration of love, laughter & forever",
+	hashtag: "#KUSHily_ever-after",
+	siteUrl: "https://bhansaliinvitation.vercel.app",
+	shareImage: "/wedding-share.jpg",
+	message: "With the blessings of our elders and the grace of Bhagwan Mahavir, we joyfully invite you to share in the auspicious beginning of our new journey together.",
+	couplePhoto: "/assets/couple-palace-CGApUC4l.jpg",
+	closingPhoto: "/assets/couple-sunset-cTlY9jXx.jpg",
+	gallery: [
+		"/assets/couple-album-03-DZfS1Po9.jpeg",
+		"/assets/couple-album-04-DXRGEyZh.jpeg",
+		"/assets/couple-album-01-4vCjuAH8.jpeg",
+		"/assets/couple-album-02-DFN2Pqeq.jpeg",
+		"/assets/couple-album-05-DKQSevuN.jpeg",
+		"/assets/couple-album-06-CqTo6UJJ.jpeg",
+		"/assets/couple-album-07-eXkyRKEx.jpeg",
+		"/assets/couple-album-08-DsVUFh2H.jpeg",
+		"/assets/couple-album-09-DiaSlsB8.jpeg"
+	],
+	musicUrl: "/music.mp3",
+	wishesEndpoint: "",
+	wishesWhatsApp: "917976830060",
+	credit: {
+		name: "Arnav",
+		url: "https://arnav-kaneriya-portfolio.vercel.app/"
+	}
+};
+var $$splitComponentImporter = () => import("./routes-DpOhKtIn.mjs");
+var SITE_URL = wedding.siteUrl.replace(/\/$/, "");
+var OG_IMAGE = new URL(wedding.shareImage, `${SITE_URL}/`).href;
+var Route = createFileRoute("/")({
+	staticData: { sitemap: true },
+	validateSearch: (s) => typeof s["to"] === "string" && s["to"].trim() ? { to: s["to"].trim().slice(0, 60) } : {},
+	head: () => ({
+		meta: [
+			{ title: `${wedding.bride.short} & ${wedding.groom.short} — Wedding Invitation · ${wedding.dateLabel}` },
+			{
+				name: "description",
+				content: `Celebrate ${wedding.bride.name} and ${wedding.groom.name}: Sangeet on January 30, Carnival and Reception on January 31, and Phere on February 1, 2027 at ${wedding.venue.name}, ${wedding.venue.address}. ${wedding.hashtag}`
+			},
+			{
+				property: "og:title",
+				content: `${wedding.bride.short} & ${wedding.groom.short} — Wedding Invitation`
+			},
+			{
+				property: "og:description",
+				content: `Join our wedding celebrations at ${wedding.venue.name}, ${wedding.venue.address}. ${wedding.dateLabel}.`
+			},
+			{
+				property: "og:type",
+				content: "website"
+			},
+			{
+				property: "og:url",
+				content: `${SITE_URL}/`
+			},
+			{
+				property: "og:site_name",
+				content: `${wedding.bride.short} & ${wedding.groom.short} Wedding`
+			},
+			{
+				property: "og:image",
+				content: OG_IMAGE
+			},
+			{
+				property: "og:image:secure_url",
+				content: OG_IMAGE
+			},
+			{
+				property: "og:image:type",
+				content: "image/jpeg"
+			},
+			{
+				property: "og:image:width",
+				content: "1200"
+			},
+			{
+				property: "og:image:height",
+				content: "630"
+			},
+			{
+				property: "og:image:alt",
+				content: `${wedding.bride.short} and ${wedding.groom.short} wedding invitation`
+			},
+			{
+				name: "twitter:card",
+				content: "summary_large_image"
+			},
+			{
+				name: "twitter:title",
+				content: `${wedding.bride.short} & ${wedding.groom.short} — Wedding Invitation`
+			},
+			{
+				name: "twitter:description",
+				content: `Join us at ${wedding.venue.name}, ${wedding.venue.address}. ${wedding.dateLabel}.`
+			},
+			{
+				name: "twitter:image",
+				content: OG_IMAGE
+			}
+		],
+		links: [{
+			rel: "canonical",
+			href: `${SITE_URL}/`
+		}]
+	}),
+	component: lazyRouteComponent($$splitComponentImporter, "component")
+});
+//#endregion
+export { wedding as n, Route as t };
