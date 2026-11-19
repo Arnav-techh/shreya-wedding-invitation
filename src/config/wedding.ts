@@ -6,7 +6,7 @@ import coupleCake from "@/assets/couple-cake.jpg";
 
 import bridePortrait from "@/assets/bride-portrait.jpg";
 import groomPortrait from "@/assets/groom-portrait.jpg";
-
+import sharePhoto from "@/assets/wedding-share.jpg";
 import album01 from "@/assets/couple-album-01.jpeg";
 import album02 from "@/assets/couple-album-02.jpeg";
 import album03 from "@/assets/couple-album-03.jpeg";
@@ -102,10 +102,10 @@ export const wedding = {
   style: "A celebration of love, laughter & forever",
   hashtag: "#KUSHily_ever-after",
 
-  siteUrl: "https://shreya-wedding-invitation.vercel.app",
+  siteUrl: "https://bhansali-invitation.vercel.app",
 
   // Using an existing couple photo for social sharing.
-  shareImage: couplePalace,
+  shareImage: sharePhoto,
 
   message:
     "With the blessings of our elders and the grace of Bhagwan Mahavir, we joyfully invite you to share in the auspicious beginning of our new journey together.",
