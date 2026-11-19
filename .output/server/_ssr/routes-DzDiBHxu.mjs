@@ -76,7 +76,7 @@ var wedding = {
 	],
 	style: "A celebration of love, laughter & forever",
 	hashtag: "#KUSHily_ever-after",
-	siteUrl: "https://bhansaliinvitation.vercel.app",
+	siteUrl: "https://bhansali-invitation.vercel.app",
 	shareImage: "/wedding-share.jpg",
 	message: "With the blessings of our elders and the grace of Bhagwan Mahavir, we joyfully invite you to share in the auspicious beginning of our new journey together.",
 	couplePhoto: "/assets/couple-palace-CGApUC4l.jpg",

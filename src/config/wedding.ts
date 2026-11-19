@@ -102,7 +102,7 @@ export const wedding = {
   style: "A celebration of love, laughter & forever",
   hashtag: "#KUSHily_ever-after",
 
-  siteUrl: "https://bhansaliinvitation.vercel.app",
+  siteUrl: "https://bhansali-invitation.vercel.app",
 
   // Using an existing couple photo for social sharing.
   shareImage: "/wedding-share.jpg",
