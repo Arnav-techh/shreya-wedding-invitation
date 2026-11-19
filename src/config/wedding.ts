@@ -1,4 +1,4 @@
-import couplePalace from "@/assets/couple-palace.jpg";
+import couplePalace from "@/assets/couple-album-09.jpeg";
 import coupleSunset from "@/assets/couple-sunset.jpg";
 import coupleSwing from "@/assets/couple-swing.jpg";
 import coupleHands from "@/assets/couple-hands.jpg";
