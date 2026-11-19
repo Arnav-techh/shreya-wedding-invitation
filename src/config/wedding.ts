@@ -5,24 +5,42 @@ import coupleHands from "@/assets/couple-hands.jpg";
 import coupleCake from "@/assets/couple-cake.jpg";
 import bridePortrait from "@/assets/bride-portrait.jpg";
 import groomPortrait from "@/assets/groom-portrait.jpg";
+import sharePhoto from "@/assets/wedding-share.jpg.asset.json";
+import album01 from "@/assets/album-01.jpeg.asset.json";
+import album02 from "@/assets/album-02.jpeg.asset.json";
+import album03 from "@/assets/album-03.jpeg.asset.json";
+import album04 from "@/assets/album-04.jpeg.asset.json";
+import album05 from "@/assets/album-05.jpeg.asset.json";
+import album06 from "@/assets/album-06.jpeg.asset.json";
+import album07 from "@/assets/album-07.jpeg.asset.json";
+import album08 from "@/assets/album-08.jpeg.asset.json";
+import album09 from "@/assets/album-09.jpeg.asset.json";
 // Central wedding configuration — edit everything here.
 export const wedding = {
   bride: { name: "Shreya Bhansali", short: "Shreya", family: "Daughter of the Bhansali Family", photo: bridePortrait },
   groom: { name: "Kunal Jain", short: "Kunal", family: "Son of the Jain Family", photo: groomPortrait },
   hostFamily: "Bhansali Family",
-  dateISO: "2027-01-31T18:00:00+05:30", // countdown target (update time once confirmed)
-  endISO: "2027-01-31T23:00:00+05:30",
+  dateISO: "2027-01-31T19:00:00+05:30",
+  endISO: "2027-02-01T01:30:00+05:30",
+  dateLabel: "Sunday, 31 January 2027",
+  coverDateLabel: "31 · January · 2027",
+  timeLabel: "Times will be updated later",
   venue: { name: "Greenland Resort", address: "Surat, Gujarat, India", mapsQuery: "Greenland Resort, Surat" },
   events: [
-    { dateISO: "2027-01-30", day: "30", month: "January", weekday: "Saturday", names: ["Mayera", "Sangeet"] },
-    { dateISO: "2027-01-31", day: "31", month: "January", weekday: "Sunday", names: ["Carnival", "Reception", "Wedding"] },
+    { title: "Beats and Bling", dateISO: "2027-01-30", day: "30", month: "January", weekday: "Saturday", names: ["Sangeet Night"], time: "7 PM onwards", meal: "Followed by Dinner", startISO: "2027-01-30T19:00:00+05:30", icon: "music" },
+    { title: "Mella Dillo Ka", dateISO: "2027-01-31", day: "31", month: "January", weekday: "Sunday", names: ["Carnival"], time: "11 AM onwards", meal: "Followed by Lunch", startISO: "2027-01-31T11:00:00+05:30", icon: "sun" },
+    { title: "Dil se Dil Tak", dateISO: "2027-01-31", day: "31", month: "January", weekday: "Sunday", names: ["Varmala and Reception"], time: "7 PM onwards", meal: "Followed by Dinner", startISO: "2027-01-31T19:00:00+05:30", icon: "heart" },
+    { title: "Circle of Love", dateISO: "2027-02-01", day: "1", month: "February", weekday: "Monday", names: ["Phere"], time: "1:30 AM", meal: "After the Sunday evening reception", startISO: "2027-02-01T01:30:00+05:30", icon: "flame" },
   ],
-  style: "A traditional Jain wedding",
+  style: "A celebration of love, laughter & forever",
+  hashtag: "#KUSHily_ever-after",
+  siteUrl: "https://shreya-wedding-invitation.lovable.app",
+  shareImage: sharePhoto.url,
   message:
     "With the blessings of our elders and the grace of Bhagwan Mahavir, we joyfully invite you to share in the auspicious beginning of our new journey together.",
   couplePhoto: couplePalace as string,
   closingPhoto: coupleSunset as string,
-  gallery: [coupleCake, coupleSwing, coupleHands, couplePalace, coupleSunset, bridePortrait] as string[], // sample photos; replace any time
+  gallery: [album03.url, album04.url, album01.url, album02.url, album05.url, album06.url, album07.url, album08.url, album09.url] as string[],
   musicUrl: "/music.mp3", // e.g. "/music.mp3" placed in /public
   wishesEndpoint: "", // POST {name, message} JSON; empty = wishes are not saved
   wishesWhatsApp: "917976830060", // International digits only, without +

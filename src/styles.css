@@ -102,6 +102,7 @@
   --leaf: oklch(0.55 0.09 145);
   --glow: oklch(0.8 0.12 15);
   --shadow-soft: 0 20px 50px -25px color-mix(in oklab, var(--gold) 45%, transparent);
+  --welcome-wash: linear-gradient(90deg, var(--background) 0%, color-mix(in oklab, var(--background) 96%, transparent) 32%, color-mix(in oklab, var(--background) 75%, transparent) 47%, transparent 70%);
 }
 
 .dark {
@@ -200,16 +201,56 @@ body { transition: background-color .6s, color .6s; }
 
 /* Keep all cover text below the arch shoulders and inside both inner rails. */
 .cover-frame {
-  max-width: min(24rem, calc((100svh - 5rem) * 0.714));
+  max-width: min(27rem, calc((100svh - 3rem) * 0.714));
   aspect-ratio: 5 / 7;
+  border: 1px solid var(--gold);
+  border-radius: 45% 45% 8px 8px;
+  background: color-mix(in oklab, var(--card) 92%, transparent);
+  box-shadow: var(--shadow-soft);
+}
+.cover-frame::before {
+  content: ""; position: absolute; inset: 9px; border: 1px solid var(--gold-light); border-radius: inherit; pointer-events: none;
 }
 .cover > .mandala-spin { opacity: 0.07; }
-.cover-content { inset: 23% 15% 6%; gap: 0.5rem; }
+.cover-content { inset: 12% 11% 6%; gap: 0.5rem; }
 .cover-eyebrow { color: var(--gold); font-size: 0.625rem; font-weight: 500; text-transform: uppercase; }
 .cover-names { font-size: 2.75rem; line-height: 1; }
 .cover-names > span { font-size: 1.75rem; line-height: 1.15; }
 .cover-guest { overflow-wrap: anywhere; line-height: 1.15; }
 .cover-open { min-height: 2.75rem; padding-inline: 1rem; font-size: 0.625rem; letter-spacing: 0; flex-shrink: 0; }
+.cover-hashtag { font-size: 0.7rem; overflow-wrap: anywhere; }
+.sacred-symbols { display: flex; align-items: center; justify-content: center; gap: 0.75rem; color: var(--gold); flex-shrink: 0; }
+.sacred-symbols svg { width: 36px; height: 42px; }
+.door-left, .door-right { border-inline: 1px solid color-mix(in oklab, var(--gold) 20%, transparent); }
+.door-left::after, .door-right::after { content: ""; position: absolute; inset: 14%; border: 1px solid color-mix(in oklab, var(--gold) 30%, transparent); border-radius: 45% 45% 0 0; }
+.welcome-stage { min-height: min(820px, 90svh); padding: 4rem max(2rem, calc((100% - 1200px) / 2)); overflow: hidden; display: flex; align-items: center; }
+.welcome-backdrop { position: absolute; inset: 0; height: 100%; width: 100%; object-fit: cover; object-position: 65% 38%; }
+.welcome-stage::after { content: ""; position: absolute; inset: 0; background: var(--welcome-wash); pointer-events: none; }
+.welcome-story { z-index: 1; width: 48%; max-width: 580px; }
+.couple-signature { max-width: none; }
+.opened-names { gap: 0.5rem; }
+.opened-person { display: flex; flex-direction: column; }
+.welcome-story .signature-name { font-size: 4.25rem; padding-inline: 0.25rem; }
+.welcome-story .signature-amp { font-size: 2.5rem; margin: 0; }
+.welcome-story .signature-family { font-size: 0.85rem; }
+.photo-viewer { height: min(80svh, 1000px); }
+.event-grid { max-width: 64rem; }
+.event-card { position: relative; overflow: hidden; border: 1px solid var(--gold-light); border-radius: 8px; background: var(--card); }
+.event-card::before { content: ""; position: absolute; inset: 7px; border: 1px solid color-mix(in oklab, var(--gold) 20%, transparent); border-radius: 3px; pointer-events: none; }
+.event-number { position: absolute; right: 18px; top: 10px; font-family: var(--font-display); font-size: 3rem; color: var(--gold); opacity: 0.18; }
+.event-sun, .event-flame { background: var(--band); }
+@media (min-width: 1200px) { .bg-band > .event-grid { max-width: 68rem; grid-template-columns: repeat(4, minmax(0, 1fr)); } .event-card h3 { font-size: 2rem; } }
+@media (max-width: 767px) {
+  .welcome-stage { min-height: 960px; padding: 27rem 1.25rem 3rem; align-items: flex-end; }
+  .welcome-backdrop { height: 650px; object-position: 55% 20%; }
+  .welcome-stage::after { background: linear-gradient(180deg, transparent 20%, color-mix(in oklab, var(--background) 10%, transparent) 32%, var(--background) 59%); }
+  .welcome-story { width: 100%; max-width: none; }
+  .welcome-story .signature-name { font-size: 3.5rem; }
+  .welcome-story .signature-amp { font-size: 2rem; }
+  .welcome-msg p:first-child { margin-top: 1.5rem; }
+  .sparkle:nth-child(n+9), .float-up:nth-child(n+7) { display: none; }
+  .arch-frame::after, .card-soft::after { animation-duration: 16s; }
+}
 .couple-signature { max-width: 30rem; }
 .signature-name { font-size: 5rem; line-height: 1.25; padding-inline: 1rem; color: var(--foreground); }
 .signature-family { font-size: 1rem; text-transform: uppercase; color: var(--muted-foreground); }
@@ -223,6 +264,9 @@ body { transition: background-color .6s, color .6s; }
   .cover-guest { font-size: 1rem; }
   .cover-content > .text-base { font-size: 0.75rem; }
   .cover-content > svg { width: 3.5rem; }
+  .cover-content { inset: 13% 11% 5%; }
+  .cover-content .sacred-symbols svg { width: 24px; height: 28px; }
+  .cover-hashtag { font-size: 0.6rem; }
   .cover-open { min-height: 2.25rem; padding-inline: 0.75rem; font-size: 0.5625rem; }
 }
 
@@ -241,7 +285,7 @@ body { transition: background-color .6s, color .6s; }
 .arch-frame::after, .card-soft::after {
   content: ""; position: absolute; inset: 0; pointer-events: none; border-radius: inherit;
   background: linear-gradient(115deg, transparent 35%, color-mix(in oklab, var(--gold-light) 40%, transparent) 50%, transparent 65%);
-  background-size: 300% 100%; animation: sheen 7s ease-in-out infinite;
+  background-size: 300% 100%; animation: sheen 14s ease-in-out infinite;
 }
 .card-soft { position: relative; overflow: hidden; }
 @keyframes sheen { 0%, 60% { background-position: 150% 0; } 100% { background-position: -50% 0; } }
@@ -254,4 +298,6 @@ body { transition: background-color .6s, color .6s; }
 @media (prefers-reduced-motion: reduce) {
   .eyebrow, .cover-eyebrow, .signature-name, .arch-frame img, .arch-frame::after, .card-soft::after, .spin-slow, .sparkle { animation: none; }
   .sparkle { display: none; }
+  .eyebrow, .cover-eyebrow { background: none; color: var(--gold); }
+  .arch-frame::after, .card-soft::after { display: none; }
 }

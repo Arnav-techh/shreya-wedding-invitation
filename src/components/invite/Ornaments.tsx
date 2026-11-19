@@ -1,4 +1,22 @@
 import { useEffect, useState } from "react";
+import { Button } from "@/components/ui/button";
+
+export function SacredSymbols({ className = "" }: { className?: string }) {
+  return <div className={`sacred-symbols ${className}`}>
+    <svg viewBox="0 0 64 64" role="img" aria-label="Ganesh ji" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M23 15l9-9 9 9M22 17q10-5 20 0M24 22q-17-9-17 7q0 14 16 15M40 22q17-9 17 7q0 14-16 15M25 20q-7 10-1 20M39 20q7 10 1 20M29 31q3-4 6 0M32 32v12q0 11 10 8q5-2 1-7M23 47q-8 4-9 10h36q-1-6-9-10" />
+      <path d="M26 29h1M37 29h1M30 20h4M18 57h28" />
+    </svg>
+    <span className="h-8 w-px bg-gold/30" aria-hidden />
+    <svg viewBox="0 0 64 76" role="img" aria-label="Jain Dharma — Ahimsa" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M12 60q-3-8-3-15V29q0-5 5-5q4 0 4 5v9V12q0-6 5-6q4 0 4 6v22V7q0-5 5-5t5 5v27V12q0-6 5-6t5 6v25q4-10 9-7q4 3 0 10l-9 20z" />
+      <circle cx="32" cy="47" r="9" />
+      {Array.from({length:24},(_,i)=><path key={i} d="M32 39v3" transform={`rotate(${i*15} 32 47)`} strokeWidth=".7" />)}
+      <circle cx="32" cy="47" r="2" />
+      <text x="32" y="72" textAnchor="middle" stroke="none" fill="currentColor" fontSize="7">AHIMSA</text>
+    </svg>
+  </div>;
+}
 export function Arch({ className = "" }: { className?: string }) {
   return (
     <svg viewBox="0 0 300 420" className={className} fill="none" aria-hidden>
@@ -98,14 +116,14 @@ export function FloatingDecor() {
 export function ThemeToggle() {
   const [dark, setDark] = useStateTheme();
   return (
-    <button onClick={() => setDark(!dark)} aria-label={dark ? "Switch to light theme" : "Switch to dark theme"} aria-pressed={dark}
+    <Button variant="outline" size="icon" onClick={() => setDark(!dark)} aria-label={dark ? "Switch to light theme" : "Switch to dark theme"} aria-pressed={dark}
       className="fixed right-4 top-4 z-[55] flex h-11 w-11 items-center justify-center rounded-full border border-gold/50 bg-card/85 text-gold shadow-soft backdrop-blur transition-transform hover:rotate-12">
       {dark ? (
         <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="1.6"><circle cx="12" cy="12" r="4.5" />{Array.from({ length: 8 }, (_, i) => <line key={i} x1="12" y1="2" x2="12" y2="4.5" transform={`rotate(${i * 45} 12 12)`} />)}</svg>
       ) : (
         <svg viewBox="0 0 24 24" className="h-5 w-5" fill="currentColor"><path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z" /></svg>
       )}
-    </button>
+    </Button>
   );
 }
 function useStateTheme(): [boolean, (v: boolean) => void] {

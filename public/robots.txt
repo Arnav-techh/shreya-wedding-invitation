@@ -12,3 +12,5 @@ Allow: /
 
 User-agent: *
 Allow: /
+
+Sitemap: https://shreya-wedding-invitation.lovable.app/sitemap.xml

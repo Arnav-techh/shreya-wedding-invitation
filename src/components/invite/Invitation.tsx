@@ -2,9 +2,9 @@ import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { useEffect, useMemo, useRef, useState, type ReactNode } from "react";
 import { wedding } from "@/config/wedding";
 import { Button } from "@/components/ui/button";
-import { MapPin, CalendarDays, MessageCircle } from "lucide-react";
+import { MapPin, CalendarDays, MessageCircle, Music, Sun, Heart, Flame, X, ChevronLeft, ChevronRight } from "lucide-react";
 import { whatsappWishesUrl } from "@/lib/whatsapp-wishes";
-import { Arch, FloatingDecor, Jharokha, Lotus, Mandala, Placeholder, ThemeToggle, Toran } from "./Ornaments";
+import { Arch, FloatingDecor, Jharokha, Lotus, Mandala, Placeholder, SacredSymbols, ThemeToggle, Toran } from "./Ornaments";
 
 const fmt = (d: string) => new Date(d).toISOString().replace(/[-:]|\.\d{3}/g, "");
 export const calendarUrl = () => {
@@ -63,25 +63,26 @@ function Petals() {
 }
 
 function Cover({ guest, onOpen }: { guest?: string | undefined; onOpen: () => void }) {
+  const reduce = useReducedMotion();
   return (
     <motion.section key="cover" className="cover fixed inset-0 z-50 flex items-center justify-center overflow-hidden px-6"
-      exit={{ opacity: 0, scale: 1.08, filter: "blur(6px)" }} transition={{ duration: 1.1, ease: [0.65, 0, 0.35, 1] }}>
-      <motion.div className="absolute inset-y-0 left-0 w-1/2 door-left" exit={{ x: "-100%" }} transition={{ duration: 1.1, ease: [0.65, 0, 0.35, 1] }} />
-      <motion.div className="absolute inset-y-0 right-0 w-1/2 door-right" exit={{ x: "100%" }} transition={{ duration: 1.1, ease: [0.65, 0, 0.35, 1] }} />
+      exit={reduce ? { opacity: 0 } : { opacity: 0, scale: 1.03 }} transition={{ duration: reduce ? 0 : 0.8 }}>
+      <motion.div className="absolute inset-y-0 left-0 w-1/2 door-left" exit={reduce ? {} : { x: "-100%" }} transition={{ duration: 0.8 }} />
+      <motion.div className="absolute inset-y-0 right-0 w-1/2 door-right" exit={reduce ? {} : { x: "100%" }} transition={{ duration: 0.8 }} />
       <Toran className="absolute inset-x-0 top-0 h-20 w-full" />
       <Mandala className="absolute left-1/2 top-1/2 -ml-[260px] -mt-[260px] h-[520px] w-[520px] text-gold opacity-20 spin-slow" />
       <FloatingDecor />
       <div className="cover-frame relative w-full">
-        <Arch className="arch-glow absolute inset-0 m-auto h-full w-full text-gold" />
-        <Arch className="absolute inset-0 m-auto h-full w-full text-gold" />
-        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1.2 }}
+        <motion.div initial={reduce ? false : { opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7 }}
           className="cover-content absolute flex flex-col items-center justify-between text-center">
+          <SacredSymbols />
           <p className="cover-eyebrow">The Wedding Celebration</p>
           <h1 className="cover-names font-display text-foreground">
             {wedding.bride.short}<span className="block font-script text-gold">&amp;</span>{wedding.groom.short}
           </h1>
           <Lotus className="w-20 shrink-0 text-gold" />
           <p className="font-display text-base text-foreground/80">{wedding.coverDateLabel}</p>
+          <p className="cover-hashtag text-gold">{wedding.hashtag}</p>
           <div className="w-full text-sm text-muted-foreground">
             <p className="text-xs uppercase">Dear</p>
             <p className="cover-guest font-display text-xl text-foreground">{guest || "Our Beloved Guest"}</p>
@@ -96,12 +97,12 @@ function Cover({ guest, onOpen }: { guest?: string | undefined; onOpen: () => vo
 function MusicControl({ playing, toggle }: { playing: boolean; toggle: () => void }) {
   const has = !!wedding.musicUrl;
   return (
-    <button onClick={toggle} disabled={!has} aria-pressed={playing}
+    <Button variant="outline" size="icon" onClick={toggle} disabled={!has} aria-pressed={playing}
       aria-label={has ? (playing ? "Pause music" : "Play music") : "Background music not configured"}
       title={has ? undefined : "Add a music file in the wedding config"}
       className="fixed bottom-5 right-5 z-30 flex h-12 w-12 items-center justify-center rounded-full border border-gold/50 bg-card/90 text-gold shadow-soft backdrop-blur disabled:opacity-50">
       <span className={playing ? "animate-spin [animation-duration:4s]" : ""}>{playing ? "❚❚" : "♫"}</span>
-    </button>
+    </Button>
   );
 }
 
@@ -144,10 +145,10 @@ function Gallery() {
       <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
         {items.map((src, i) => (
           <Reveal key={i} delay={(i % 3) * 0.08} className={i % 3 === 0 ? "row-span-2" : ""}>
-            <button onClick={() => setOpen(i)} aria-label={`View photo ${i + 1}`}
-              className={`group block w-full overflow-hidden rounded-2xl ${i % 3 === 0 ? "aspect-[3/5]" : "aspect-square"}`}>
+            <Button variant="ghost" onClick={() => setOpen(i)} aria-label={`View photo ${i + 1}`}
+              className={`group block h-auto w-full overflow-hidden rounded-lg p-0 ${i % 3 === 0 ? "aspect-[3/5]" : "aspect-square"}`}>
               <div className="h-full w-full transition-transform duration-700 group-hover:scale-105"><Placeholder src={src} label={`Gallery photo ${i + 1}`} /></div>
-            </button>
+            </Button>
           </Reveal>
         ))}
       </div>
@@ -156,12 +157,12 @@ function Gallery() {
           <motion.div role="dialog" aria-modal aria-label="Photo viewer" className="fixed inset-0 z-[60] flex items-center justify-center bg-foreground/80 p-4 backdrop-blur"
             initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} onClick={() => setOpen(null)}>
             <motion.div key={open} initial={{ scale: 0.92, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} exit={{ scale: 0.95, opacity: 0 }}
-              className="aspect-[4/5] w-full max-w-md overflow-hidden rounded-2xl" onClick={(e) => e.stopPropagation()}>
-              <Placeholder src={items[open]} label={`Gallery photo ${open + 1}`} />
+              className="photo-viewer w-full max-w-4xl" onClick={(e) => e.stopPropagation()}>
+              <Placeholder src={items[open]} label={`Gallery photo ${open + 1}`} className="!object-contain" />
             </motion.div>
-            <button autoFocus onClick={() => setOpen(null)} className="absolute right-4 top-4 h-11 w-11 rounded-full bg-card text-foreground" aria-label="Close">✕</button>
-            <button onClick={(e) => { e.stopPropagation(); setOpen((open - 1 + items.length) % items.length); }} className="absolute left-3 h-11 w-11 rounded-full bg-card/90 text-foreground" aria-label="Previous photo">‹</button>
-            <button onClick={(e) => { e.stopPropagation(); setOpen((open + 1) % items.length); }} className="absolute right-3 h-11 w-11 rounded-full bg-card/90 text-foreground" aria-label="Next photo">›</button>
+            <Button variant="outline" size="icon" autoFocus onClick={() => setOpen(null)} className="absolute right-4 top-4" aria-label="Close"><X /></Button>
+            <Button variant="outline" size="icon" onClick={(e) => { e.stopPropagation(); setOpen((open - 1 + items.length) % items.length); }} className="absolute left-3" aria-label="Previous photo"><ChevronLeft /></Button>
+            <Button variant="outline" size="icon" onClick={(e) => { e.stopPropagation(); setOpen((open + 1) % items.length); }} className="absolute right-3" aria-label="Next photo"><ChevronRight /></Button>
           </motion.div>
         )}
       </AnimatePresence>
@@ -227,29 +228,34 @@ export function Invitation({ guest }: { guest?: string | undefined }) {
       {opened && <Sparkles />}
       <ThemeToggle />
 
-      <main aria-hidden={!opened} className="relative z-10">
+      <main aria-hidden={!opened} inert={!opened} className="relative z-10">
         <Toran className="h-16 w-full" />
         {/* Welcome */}
-        <section className="section welcome-grid relative pt-10 text-center">
-          <Mandala className="pointer-events-none absolute left-1/2 top-24 -z-10 h-[420px] w-[420px] -translate-x-1/2 text-gold opacity-15 spin-slow" />
+        <section className="welcome-stage relative text-center">
+          <img src={wedding.couplePhoto} alt={`${wedding.bride.short} and ${wedding.groom.short}`} className="welcome-backdrop" fetchPriority="high" />
+          <div className="welcome-story relative">
+          <SacredSymbols className="mx-auto mb-5" />
           <Reveal className="welcome-eyebrow"><p className="eyebrow">Together with their families</p></Reveal>
           <Reveal delay={0.1} className="welcome-names">
             <div className="couple-signature mx-auto mt-7">
-              <h2 className="flex flex-col items-center">
+              <h2 className="opened-names flex flex-wrap items-center justify-center">
+                <span className="opened-person">
                 <span className="signature-name font-couple">{wedding.bride.short}</span>
                 <span className="signature-family font-display">{wedding.bride.name.slice(wedding.bride.short.length).trim()}</span>
+                </span>
                 <span className="signature-amp font-script text-gold">&amp;</span>
+                <span className="opened-person">
                 <span className="signature-name font-couple">{wedding.groom.short}</span>
                 <span className="signature-family font-display">{wedding.groom.name.slice(wedding.groom.short.length).trim()}</span>
+                </span>
               </h2>
               <Lotus className="mx-auto mt-6 w-28 text-gold" />
             </div>
           </Reveal>
-          <Reveal delay={0.2} className="welcome-photo mx-auto mt-10 w-full max-w-sm">
-            <div className="arch-frame float-soft aspect-[3/4]"><Placeholder src={wedding.couplePhoto} label={`${wedding.bride.short} & ${wedding.groom.short}`} /></div>
-          </Reveal>
           <Reveal delay={0.1} className="welcome-msg"><p className="mx-auto mt-10 max-w-md leading-relaxed text-muted-foreground">{wedding.message}</p>
-            <p className="mt-4 font-display text-xl italic text-gold">{wedding.style}</p></Reveal>
+            <p className="mt-4 font-display text-xl italic text-gold">{wedding.style}</p>
+            <p className="mt-4 text-sm text-gold">{wedding.hashtag}</p></Reveal>
+          </div>
         </section>
 
         {/* Couple */}
@@ -278,20 +284,18 @@ export function Invitation({ guest }: { guest?: string | undefined }) {
 
         {/* Details */}
         <section className="section bg-band">
-          <Heading eyebrow="Two days of celebration" title="Wedding Events" />
-          <div className="grid gap-5 sm:grid-cols-2">
+          <Heading eyebrow="Let the celebrations begin" title="Wedding Events" />
+          <div className="event-grid grid gap-5 sm:grid-cols-2">
             {wedding.events.map((event, i) => (
-              <Reveal key={event.dateISO} delay={i * 0.12} className="event-card card-soft p-6 text-center">
-                <p className="text-xs uppercase text-muted-foreground">{event.weekday}</p>
-                <time dateTime={event.dateISO} className="mt-3 block">
-                  <span className="block font-display text-6xl text-gold">{event.day}</span>
-                  <span className="mt-1 block font-display text-lg">{event.month} {new Date(`${event.dateISO}T00:00:00Z`).getUTCFullYear()}</span>
-                </time>
+              <Reveal key={event.title} delay={i * 0.08} className={`event-card event-${event.icon} p-7 text-center`}>
+                <span className="event-number" aria-hidden>0{i + 1}</span>
+                {(() => { const Icon = [Music, Sun, Heart, Flame][i] ?? Heart; return <Icon className="mx-auto mb-5 h-8 w-8 text-gold" aria-hidden />; })()}
+                <h3 className="font-display text-4xl">{event.title}</h3>
+                <p className="mt-2 text-sm uppercase text-muted-foreground">{event.names.join(" & ")}</p>
                 <Lotus className="mx-auto my-5 w-24 text-gold" />
-                <ul className="space-y-2 font-display text-3xl">
-                  {event.names.map((name) => <li key={name}>{name}</li>)}
-                </ul>
-                <p className="mt-6 text-sm text-muted-foreground">{wedding.timeLabel}</p>
+                <p className="font-display text-2xl">{event.time}</p>
+                <p className="mt-2 text-sm text-muted-foreground">{event.meal}</p>
+                <time dateTime={event.startISO} className="mt-7 block border-t border-gold/25 pt-5 font-display text-lg">{event.day} {event.month} {new Date(`${event.dateISO}T00:00:00Z`).getUTCFullYear()} <span className="block text-sm text-muted-foreground">{event.weekday}</span></time>
               </Reveal>
             ))}
           </div>
@@ -319,7 +323,7 @@ export function Invitation({ guest }: { guest?: string | undefined }) {
         </section>
 
         <footer className="relative z-10 border-t border-border py-8 text-center text-sm text-muted-foreground">
-          Coded and Crafted with <span className="heartbeat inline-block text-blush-deep" aria-label="love">♥</span> by{" "}
+          Made with <span className="heartbeat inline-block text-blush-deep" aria-label="love">♥</span> by{" "}
           <a href={wedding.credit.url} target="_blank" rel="noopener noreferrer" className="text-gold underline-offset-4 hover:underline">{wedding.credit.name}</a>
         </footer>
       </main>
