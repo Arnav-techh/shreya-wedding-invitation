@@ -1,8 +1,9 @@
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { useEffect, useMemo, useRef, useState, type ReactNode } from "react";
+import { createPortal } from "react-dom";
 import { wedding } from "@/config/wedding";
 import { Button } from "@/components/ui/button";
-import { MapPin, CalendarDays, MessageCircle, Music, Sun, Heart, Flame, X, ChevronLeft, ChevronRight } from "lucide-react";
+import { MapPin, CalendarDays, MessageCircle, Music, Sun, Heart, Flame, Flower2, X, ChevronLeft, ChevronRight } from "lucide-react";
 import { whatsappWishesUrl } from "@/lib/whatsapp-wishes";
 import { Arch, FloatingDecor, Jharokha, Lotus, Mandala, Placeholder, SacredSymbols, ThemeToggle, Toran } from "./Ornaments";
 
@@ -19,11 +20,20 @@ export const calendarUrl = () => {
 };
 export const mapsUrl = () => `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(wedding.venue.mapsQuery)}`;
 
+function VenueActions() {
+  return <div className="venue-actions mt-7 flex flex-col gap-3 sm:flex-row sm:justify-center">
+    <Button asChild className="btn-gold"><a href={mapsUrl()} target="_blank" rel="noopener noreferrer"><MapPin aria-hidden />Open in Google Maps</a></Button>
+    <Button asChild variant="outline" className="btn-outline"><a href={calendarUrl()} target="_blank" rel="noopener noreferrer"><CalendarDays aria-hidden />Add to Google Calendar</a></Button>
+  </div>;
+}
+
+const eventIcons = { flower: Flower2, music: Music, sun: Sun, heart: Heart, flame: Flame };
+
 function Reveal({ children, className = "", delay = 0 }: { children: ReactNode; className?: string; delay?: number }) {
   const reduce = useReducedMotion();
   return (
     <motion.div className={className} initial={reduce ? false : { opacity: 0, y: 28 }} whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-60px" }} transition={{ duration: 0.9, delay, ease: [0.22, 1, 0.36, 1] }}>
+      viewport={{ once: true, margin: "-30px" }} transition={{ duration: 0.65, delay, ease: [0.22, 1, 0.36, 1] }}>
       {children}
     </motion.div>
   );
@@ -66,13 +76,17 @@ function Cover({ guest, onOpen }: { guest?: string | undefined; onOpen: () => vo
   const reduce = useReducedMotion();
   return (
     <motion.section key="cover" className="cover fixed inset-0 z-50 flex items-center justify-center overflow-hidden px-6"
-      exit={reduce ? { opacity: 0 } : { opacity: 0, scale: 1.03 }} transition={{ duration: reduce ? 0 : 0.8 }}>
-      <motion.div className="absolute inset-y-0 left-0 w-1/2 door-left" exit={reduce ? {} : { x: "-100%" }} transition={{ duration: 0.8 }} />
-      <motion.div className="absolute inset-y-0 right-0 w-1/2 door-right" exit={reduce ? {} : { x: "100%" }} transition={{ duration: 0.8 }} />
+      exit={{ opacity: 0 }} transition={{ duration: reduce ? 0 : 0.2, delay: reduce ? 0 : 1.1 }}>
+      <motion.div className="absolute inset-y-0 left-0 w-1/2 door-left" exit={reduce ? {} : { rotateY: -105 }} transition={{ duration: 1.1, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}>
+        <Arch className="gate-arch text-gold" /><Mandala className="gate-medallion text-gold" /><span className="gate-handle" />
+      </motion.div>
+      <motion.div className="absolute inset-y-0 right-0 w-1/2 door-right" exit={reduce ? {} : { rotateY: 105 }} transition={{ duration: 1.1, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}>
+        <Arch className="gate-arch text-gold" /><Mandala className="gate-medallion text-gold" /><span className="gate-handle" />
+      </motion.div>
       <Toran className="absolute inset-x-0 top-0 h-20 w-full" />
       <Mandala className="absolute left-1/2 top-1/2 -ml-[260px] -mt-[260px] h-[520px] w-[520px] text-gold opacity-20 spin-slow" />
       <FloatingDecor />
-      <div className="cover-frame relative w-full">
+      <motion.div className="cover-frame relative w-full" exit={{ opacity: 0, y: reduce ? 0 : -12 }} transition={{ duration: reduce ? 0 : 0.25 }}>
         <motion.div initial={reduce ? false : { opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7 }}
           className="cover-content absolute flex flex-col items-center justify-between text-center">
           <SacredSymbols />
@@ -82,14 +96,14 @@ function Cover({ guest, onOpen }: { guest?: string | undefined; onOpen: () => vo
           </h1>
           <Lotus className="w-20 shrink-0 text-gold" />
           <p className="font-display text-base text-foreground/80">{wedding.coverDateLabel}</p>
-          <p className="cover-hashtag text-gold">{wedding.hashtag}</p>
+          <p className="cover-hashtag wedding-hashtag">{wedding.hashtag}</p>
           <div className="w-full text-sm text-muted-foreground">
             <p className="text-xs uppercase">Dear</p>
             <p className="cover-guest font-display text-xl text-foreground">{guest || "Our Beloved Guest"}</p>
           </div>
           <Button onClick={onOpen} className="btn-gold btn-pulse cover-open">Open Invitation</Button>
         </motion.div>
-      </div>
+      </motion.div>
     </motion.section>
   );
 }
@@ -152,8 +166,8 @@ function Gallery() {
           </Reveal>
         ))}
       </div>
-      <AnimatePresence>
-        {open !== null && (
+      {open !== null && createPortal(
+        <AnimatePresence>
           <motion.div role="dialog" aria-modal aria-label="Photo viewer" className="fixed inset-0 z-[60] flex items-center justify-center bg-foreground/80 p-4 backdrop-blur"
             initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} onClick={() => setOpen(null)}>
             <motion.div key={open} initial={{ scale: 0.92, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} exit={{ scale: 0.95, opacity: 0 }}
@@ -164,8 +178,8 @@ function Gallery() {
             <Button variant="outline" size="icon" onClick={(e) => { e.stopPropagation(); setOpen((open - 1 + items.length) % items.length); }} className="absolute left-3" aria-label="Previous photo"><ChevronLeft /></Button>
             <Button variant="outline" size="icon" onClick={(e) => { e.stopPropagation(); setOpen((open + 1) % items.length); }} className="absolute right-3" aria-label="Next photo"><ChevronRight /></Button>
           </motion.div>
-        )}
-      </AnimatePresence>
+        </AnimatePresence>, document.body
+      )}
     </>
   );
 }
@@ -254,7 +268,7 @@ export function Invitation({ guest }: { guest?: string | undefined }) {
           </Reveal>
           <Reveal delay={0.1} className="welcome-msg"><p className="mx-auto mt-10 max-w-md leading-relaxed text-muted-foreground">{wedding.message}</p>
             <p className="mt-4 font-display text-xl italic text-gold">{wedding.style}</p>
-            <p className="mt-4 text-sm text-gold">{wedding.hashtag}</p></Reveal>
+            <p className="wedding-hashtag mt-6">{wedding.hashtag}</p></Reveal>
           </div>
         </section>
 
@@ -279,7 +293,7 @@ export function Invitation({ guest }: { guest?: string | undefined }) {
         {/* Countdown */}
         <section className="section">
           <Heading eyebrow="Counting down to" title="Our Special Day" />
-          <Reveal><Countdown /></Reveal>
+          <Reveal><Countdown /><VenueActions /></Reveal>
         </section>
 
         {/* Details */}
@@ -289,7 +303,7 @@ export function Invitation({ guest }: { guest?: string | undefined }) {
             {wedding.events.map((event, i) => (
               <Reveal key={event.title} delay={i * 0.08} className={`event-card event-${event.icon} p-7 text-center`}>
                 <span className="event-number" aria-hidden>0{i + 1}</span>
-                {(() => { const Icon = [Music, Sun, Heart, Flame][i] ?? Heart; return <Icon className="mx-auto mb-5 h-8 w-8 text-gold" aria-hidden />; })()}
+                {(() => { const Icon = eventIcons[event.icon as keyof typeof eventIcons] ?? Heart; return <Icon className="mx-auto mb-5 h-8 w-8 text-gold" aria-hidden />; })()}
                 <h3 className="font-display text-4xl">{event.title}</h3>
                 <p className="mt-2 text-sm uppercase text-muted-foreground">{event.names.join(" & ")}</p>
                 <Lotus className="mx-auto my-5 w-24 text-gold" />
@@ -304,10 +318,7 @@ export function Invitation({ guest }: { guest?: string | undefined }) {
             <p className="eyebrow mt-3">All celebrations at</p>
             <h3 className="mt-3 font-display text-3xl">{wedding.venue.name}</h3>
             <p className="mt-2 text-sm text-muted-foreground">{wedding.venue.address}</p>
-            <div className="mt-7 flex flex-col gap-3 sm:flex-row sm:justify-center">
-              <Button asChild className="btn-gold"><a href={mapsUrl()} target="_blank" rel="noopener noreferrer"><MapPin aria-hidden />Open in Google Maps</a></Button>
-              <Button asChild variant="outline" className="btn-outline"><a href={calendarUrl()} target="_blank" rel="noopener noreferrer"><CalendarDays aria-hidden />Add to Google Calendar</a></Button>
-            </div>
+            <VenueActions />
           </Reveal>
         </section>
 

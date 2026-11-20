@@ -19,121 +19,34 @@ import album09 from "@/assets/couple-album-09.jpeg";
 
 // Central wedding configuration — edit everything here.
 export const wedding = {
-  bride: {
-    name: "Shreya Bhansali",
-    short: "Shreya",
-    family: "Daughter of the Bhansali Family",
-    photo: bridePortrait,
-  },
-
-  groom: {
-    name: "Kunal Jain",
-    short: "Kunal",
-    family: "Son of the Jain Family",
-    photo: groomPortrait,
-  },
-
+  bride: { name: "Shreya Bhansali", short: "Shreya", family: "Daughter of the Bhansali Family", photo: bridePortrait },
+  groom: { name: "Kunal Jain", short: "Kunal", family: "Son of the Jain Family", photo: groomPortrait },
   hostFamily: "Bhansali Family",
-
   dateISO: "2027-01-31T19:00:00+05:30",
   endISO: "2027-02-01T01:30:00+05:30",
-
   dateLabel: "Sunday, 31 January 2027",
   coverDateLabel: "31 · January · 2027",
   timeLabel: "Times will be updated later",
-
-  venue: {
-    name: "Greenland Resort",
-    address: "Surat, Gujarat, India",
-    mapsQuery: "Greenland Resort, Surat",
-  },
-
+  venue: { name: "Greenland Resort", address: "Surat, Gujarat, India", mapsQuery: "Greenland Resort, Surat" },
   events: [
-    {
-      title: "Beats and Bling",
-      dateISO: "2027-01-30",
-      day: "30",
-      month: "January",
-      weekday: "Saturday",
-      names: ["Sangeet Night"],
-      time: "7 PM onwards",
-      meal: "Followed by Dinner",
-      startISO: "2027-01-30T19:00:00+05:30",
-      icon: "music",
-    },
-    {
-      title: "Mella Dillo Ka",
-      dateISO: "2027-01-31",
-      day: "31",
-      month: "January",
-      weekday: "Sunday",
-      names: ["Carnival"],
-      time: "11 AM onwards",
-      meal: "Followed by Lunch",
-      startISO: "2027-01-31T11:00:00+05:30",
-      icon: "sun",
-    },
-    {
-      title: "Dil se Dil Tak",
-      dateISO: "2027-01-31",
-      day: "31",
-      month: "January",
-      weekday: "Sunday",
-      names: ["Varmala and Reception"],
-      time: "7 PM onwards",
-      meal: "Followed by Dinner",
-      startISO: "2027-01-31T19:00:00+05:30",
-      icon: "heart",
-    },
-    {
-      title: "Circle of Love",
-      dateISO: "2027-02-01",
-      day: "1",
-      month: "February",
-      weekday: "Monday",
-      names: ["Phere"],
-      time: "1:30 AM",
-      meal: "After the Sunday evening reception",
-      startISO: "2027-02-01T01:30:00+05:30",
-      icon: "flame",
-    },
+    { title: "Odhni and Aashirwad", dateISO: "2027-01-30", day: "30", month: "January", weekday: "Saturday", names: ["Mayra"], time: "11 AM onwards", meal: "Followed by Lunch", startISO: "2027-01-30T11:00:00+05:30", icon: "flower" },
+    { title: "Beats and Bling", dateISO: "2027-01-30", day: "30", month: "January", weekday: "Saturday", names: ["Sangeet Night"], time: "7 PM onwards", meal: "Followed by Dinner", startISO: "2027-01-30T19:00:00+05:30", icon: "music" },
+    { title: "Mella Dillo Ka", dateISO: "2027-01-31", day: "31", month: "January", weekday: "Sunday", names: ["Carnival"], time: "11 AM onwards", meal: "Followed by Lunch", startISO: "2027-01-31T11:00:00+05:30", icon: "sun" },
+    { title: "Dil se Dil Tak", dateISO: "2027-01-31", day: "31", month: "January", weekday: "Sunday", names: ["Varmala and Reception"], time: "7 PM onwards", meal: "Followed by Dinner", startISO: "2027-01-31T19:00:00+05:30", icon: "heart" },
+    { title: "Circle of Love", dateISO: "2027-02-01", day: "1", month: "February", weekday: "Monday", names: ["Phere"], time: "1:30 AM", meal: "After the Sunday evening reception", startISO: "2027-02-01T01:30:00+05:30", icon: "flame" },
   ],
-
   style: "A celebration of love, laughter & forever",
   hashtag: "#KUSHily_ever-after",
-
   siteUrl: "https://bhansali-invitation.vercel.app",
-
-  // Using an existing couple photo for social sharing.
-  shareImage: "/wedding-share.jpg",
-
+  shareImage: sharePhoto.url,
   message:
     "With the blessings of our elders and the grace of Bhagwan Mahavir, we joyfully invite you to share in the auspicious beginning of our new journey together.",
-
-  couplePhoto: couplePalace,
-  closingPhoto: coupleSunset,
-
-  gallery: [
-    album03,
-    album04,
-    album01,
-    album02,
-    album05,
-    album06,
-    album07,
-    album08,
-    album09,
-  ],
-
-  musicUrl: "/music.mp3",
-
-  wishesEndpoint: "",
-  wishesWhatsApp: "917976830060",
-
-  credit: {
-    name: "Arnav",
-    url: "https://arnav-kaneriya-portfolio.vercel.app/",
-  },
+  couplePhoto: couplePalace as string,
+  closingPhoto: coupleSunset as string,
+  gallery: [album03.url, album04.url, album01.url, album02.url, album05.url, album06.url, album07.url, album08.url, album09.url] as string[],
+  musicUrl: "/music.mp3", // e.g. "/music.mp3" placed in /public
+  wishesEndpoint: "", // POST {name, message} JSON; empty = wishes are not saved
+  wishesWhatsApp: "917976830060", // International digits only, without +
+  credit: { name: "Arnav", url: "https://arnav-kaneriya-portfolio.vercel.app/" },
 };
-
 export type WeddingConfig = typeof wedding;

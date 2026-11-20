@@ -7,14 +7,6 @@ export function SacredSymbols({ className = "" }: { className?: string }) {
       <path d="M23 15l9-9 9 9M22 17q10-5 20 0M24 22q-17-9-17 7q0 14 16 15M40 22q17-9 17 7q0 14-16 15M25 20q-7 10-1 20M39 20q7 10 1 20M29 31q3-4 6 0M32 32v12q0 11 10 8q5-2 1-7M23 47q-8 4-9 10h36q-1-6-9-10" />
       <path d="M26 29h1M37 29h1M30 20h4M18 57h28" />
     </svg>
-    <span className="h-8 w-px bg-gold/30" aria-hidden />
-    <svg viewBox="0 0 64 76" role="img" aria-label="Jain Dharma — Ahimsa" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
-      <path d="M12 60q-3-8-3-15V29q0-5 5-5q4 0 4 5v9V12q0-6 5-6q4 0 4 6v22V7q0-5 5-5t5 5v27V12q0-6 5-6t5 6v25q4-10 9-7q4 3 0 10l-9 20z" />
-      <circle cx="32" cy="47" r="9" />
-      {Array.from({length:24},(_,i)=><path key={i} d="M32 39v3" transform={`rotate(${i*15} 32 47)`} strokeWidth=".7" />)}
-      <circle cx="32" cy="47" r="2" />
-      <text x="32" y="72" textAnchor="middle" stroke="none" fill="currentColor" fontSize="7">AHIMSA</text>
-    </svg>
   </div>;
 }
 export function Arch({ className = "" }: { className?: string }) {
