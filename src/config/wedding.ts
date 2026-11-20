@@ -6,15 +6,15 @@ import coupleCake from "@/assets/couple-cake.jpg";
 import bridePortrait from "@/assets/bride-portrait.jpg";
 import groomPortrait from "@/assets/groom-portrait.jpg";
 import sharePhoto from "@/assets/wedding-share.jpg.asset.json";
-import album01 from "@/assets/album-01.jpeg.asset.json";
-import album02 from "@/assets/album-02.jpeg.asset.json";
-import album03 from "@/assets/album-03.jpeg.asset.json";
-import album04 from "@/assets/album-04.jpeg.asset.json";
-import album05 from "@/assets/album-05.jpeg.asset.json";
-import album06 from "@/assets/album-06.jpeg.asset.json";
-import album07 from "@/assets/album-07.jpeg.asset.json";
-import album08 from "@/assets/album-08.jpeg.asset.json";
-import album09 from "@/assets/album-09.jpeg.asset.json";
+import album01 from "@/assets/album-01.jpeg";
+import album02 from "@/assets/album-02.jpeg";
+import album03 from "@/assets/album-03.jpeg";
+import album04 from "@/assets/album-04.jpeg";
+import album05 from "@/assets/album-05.jpeg";
+import album06 from "@/assets/album-06.jpeg";
+import album07 from "@/assets/album-07.jpeg";
+import album08 from "@/assets/album-08.jpeg";
+import album09 from "@/assets/album-09.jpeg";
 // Central wedding configuration — edit everything here.
 export const wedding = {
   bride: { name: "Shreya Bhansali", short: "Shreya", family: "Daughter of the Bhansali Family", photo: bridePortrait },
